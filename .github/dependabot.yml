@@ -1,18 +1,61 @@
 version: 2
 updates:
   - package-ecosystem: pip
-    directory: '/requirements'
+    directory: "/requirements"
     schedule:
       interval: weekly
+    groups:
+      backend:
+        update-types:
+          - minor
+          - patch
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "psycopg*"  # temp exclude due to ARM build issue
+          - "pytest"  # temp exclude due to pytest-selenium FF issue
+          - "pytest-selenium"  # temp exclude due to pytest-selenium FF issue
+          - "selenium"  # temp exclude due to pytest-selenium FF issue
     open-pull-requests-limit: 20
     labels:
       - Backend
       - dependencies
+
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      frontend:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+      dev-dependencies:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+    open-pull-requests-limit: 10
+    labels:
+      - Frontend
+      - dependencies
+
   - package-ecosystem: docker
-    directory: '/'
+    directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 20
+    open-pull-requests-limit: 10
     labels:
       - Backend
       - dependencies
+
+#  - package-ecosystem: github-actions
+#    directory: "/"
+#    schedule:
+#      interval: weekly
+#    groups:
+#      actions:
+#        patterns:
+#          - "*"
+# #TODO! verify major only bumps
