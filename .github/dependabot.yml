@@ -1,15 +1,14 @@
 version: 2
 updates:
   - package-ecosystem: pip
-    directory: '/requirements'
+    directory: "/requirements"
     schedule:
       interval: weekly
     groups:
       backend:
-        applies-to: version-updates
         update-types:
-          - "minor"
-          - "patch"
+          - minor
+          - patch
         patterns:
           - "*"
         exclude-patterns:
@@ -21,11 +20,42 @@ updates:
     labels:
       - Backend
       - dependencies
-  - package-ecosystem: docker
-    directory: '/'
+
+  - package-ecosystem: npm
+    directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 20
+    groups:
+      frontend:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+      dev-dependencies:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+    open-pull-requests-limit: 10
+    labels:
+      - Frontend
+      - dependencies
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
     labels:
       - Backend
       - dependencies
+
+#  - package-ecosystem: github-actions
+#    directory: "/"
+#    schedule:
+#      interval: weekly
+#    groups:
+#      actions:
+#        patterns:
+#          - "*"
+# #TODO! verify major only bumps
