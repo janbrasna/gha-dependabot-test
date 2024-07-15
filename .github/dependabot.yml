@@ -4,6 +4,19 @@ updates:
     directory: '/requirements'
     schedule:
       interval: weekly
+    groups:
+      backend:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "psycopg*"  # temp exclude due to ARM build issue
+          - "pytest"  # temp exclude due to pytest-selenium FF issue
+          - "pytest-selenium"  # temp exclude due to pytest-selenium FF issue
+          - "selenium"  # temp exclude due to pytest-selenium FF issue
     open-pull-requests-limit: 20
     labels:
       - Backend
