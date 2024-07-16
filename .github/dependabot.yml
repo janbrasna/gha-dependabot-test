@@ -4,6 +4,7 @@ updates:
     directory: "/requirements"
     schedule:
       interval: weekly
+    versioning-strategy: increase
     groups:
       backend:
         update-types:
