@@ -18,6 +18,8 @@ updates:
           - "pytest-selenium"  # temp exclude due to pytest-selenium FF issue
           - "selenium"  # temp exclude due to pytest-selenium FF issue
     open-pull-requests-limit: 20
+    commit-message:
+      prefix: "pip(backend)"
     labels:
       - Backend
       - dependencies
@@ -38,6 +40,9 @@ updates:
           - minor
           - patch
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "npm"
+      include: scope
     labels:
       - Frontend
       - dependencies
@@ -52,6 +57,8 @@ updates:
     - dependency-name: "node"
       update-types: ["version-update:semver-major"]
     open-pull-requests-limit: 5
+    commit-message:
+      prefix: "docker(build)"
     labels:
       - Frontend
       - dependencies
@@ -64,3 +71,5 @@ updates:
       actions:
         patterns:
           - "*"
+    commit-message:
+      prefix: "actions(gha)"
