@@ -45,17 +45,21 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 10
+    ignore:
+    - dependency-name: "python"
+      # updated manually
+    - dependency-name: "node"
+      update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 5
     labels:
-      - Backend
+      - Frontend
       - dependencies
 
-#  - package-ecosystem: github-actions
-#    directory: "/"
-#    schedule:
-#      interval: weekly
-#    groups:
-#      actions:
-#        patterns:
-#          - "*"
-# #TODO! verify major only bumps
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
